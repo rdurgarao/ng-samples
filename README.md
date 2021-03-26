@@ -100,7 +100,8 @@ Registration Component
 
 ## Angular Topics
 ```
-20.TypeScript (2 Days)21. Angular-CLI & project structure ( 1 Day)
+20.TypeScript (2 Days)
+21. Angular-CLI & project structure ( 1 Day)
 22. Angular Exercise ( parallel on every day)
 27. Angular Router (2 Days)
 23. Angular Components (2 Days)
@@ -109,5 +110,6 @@ Registration Component
 
 24.Providers and Dependency Injection (4 Days)
 25. Observables and RxJS (5 Days)
-26.HttpClient ( 2 Days)30.Advanced - State management with ngRx ( 5 Days) 
+26.HttpClient ( 2 Days)
+30.Advanced - State management with ngRx ( 5 Days) 
 ```

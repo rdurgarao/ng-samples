@@ -1,0 +1,44 @@
+<button (click)="showCart()">Cart</button>
+
+<div id="cart-body" *ngIf="cartVisible">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Units
+                </th>
+                <th>
+                    Cost
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of lineItems">
+                <td>
+                    {{item.name}}
+                </td>
+                <td>
+                    {{item.units}}
+                </td>
+                <td>
+                    {{item.cost}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>
+                        Total
+                    </b>
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{total}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
