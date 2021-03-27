@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -10,34 +11,21 @@ export class CartComponent implements OnInit {
   public lineItems = [];
   public total: number;
   public cartVisible: Boolean = false;
-  constructor() {
+  constructor(private cartService: CartService) {
 
    }
 
   ngOnInit(): void {
-    this.lineItems = [{
-      name: 'sample',
-      units: 2,
-      cost: 40
-    },{
-      name: 'sample 2',
-      units: 4,
-      cost: 80
-    }, {
-      name: 'sample 3',
-      units: 5,
-      cost: 120
-    }];
-
-    let sum = 0;
-    this.lineItems.forEach(item => {
-      sum = sum + item.cost;
+    this.cartService._items.subscribe(items => {
+      this.lineItems = items;
     });
 
-    this.total = sum;
+    this.cartService._total.subscribe(total => {
+      this.total = total;
+    });
   }
 
   showCart() {
-    this.cartVisible = !this.cartVisible
+    this.cartVisible = !this.cartVisible;
   }
 }

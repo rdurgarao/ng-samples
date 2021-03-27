@@ -1,6 +1,6 @@
 [
-    {"title": "sample1", "description": "text"},
-    {"title": "sample2", "description": "text"},
-    {"title": "sample3", "description": "text"},
-    {"title": "sample4", "description": "text"}
+    {"id": 1, "title": "sample1", "description": "text", "cost": 40},
+    {"id": 2, "title": "sample2", "description": "text", "cost": 70},
+    {"id": 3, "title": "sample3", "description": "text", "cost": 200},
+    {"id": 4, "title": "sample4", "description": "text", "cost": 100}
 ]

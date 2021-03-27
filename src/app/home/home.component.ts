@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as productsJSON from '../../data/most_selled_products.json';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

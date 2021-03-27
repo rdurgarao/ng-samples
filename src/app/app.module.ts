@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { ProductCardComponent } from './shared/product-card/product-card.component';
 import { CartComponent } from './shared/cart/cart.component';
+import { CartService } from './cart.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { CartComponent } from './shared/cart/cart.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
