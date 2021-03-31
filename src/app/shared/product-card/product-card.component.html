@@ -1,5 +1,5 @@
 <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="{{imagePath}}">
+    <img class="card-img-top" src="{{image}}">
     <div class="card-body">
       <h5 class="card-title">{{title}}</h5>
       <p class="card-text">{{description}}</p>
@@ -10,6 +10,9 @@
       <li class="list-group-item">Vestibulum at eros</li>
     </ul> -->
     <div class="card-body">
+      <!-- <a (click)="minusItem(item)">-</a>
+      <input type="text" value={{item.units}}/>
+      <a (click)="plusItem(item)">+</a> -->
       <a (click)="addToCart()" class="card-link">Add to cart</a>
       <!-- <a href="#" class="card-link">Another link</a> -->
     </div>

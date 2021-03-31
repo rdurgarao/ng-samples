@@ -11,15 +11,31 @@ export class CartService {
   private items = [];
   private total:number;
 
-  constructor() {}
+  constructor() {
+    this.items = this.getItemsFromStorage() || [];
 
-  public setItem(item){
+    this._items.next(this.items);
+    let sum = 0;
+    this.items.forEach(item => {
+      sum = sum + item.cost * item.units;
+    });
+
+    this.total = sum;
+    this._total.next(this.total);
+  }
+
+  public setItem(item, removeItem=false){
     const matchedItems = this.items.filter(it => item.id == it.id);
 
     if(matchedItems.length > 0){
       let modifiedItems = this.items.map(it => {
         if(item.id == it.id){
-          it['units'] = it['units'] + 1;
+
+          if(removeItem){
+            it['units'] = it['units'] - 1;  
+          } else {
+            it['units'] = it['units'] + 1;
+          }
         }
 
         return it;
@@ -27,8 +43,14 @@ export class CartService {
 
       this.items = modifiedItems;
     } else {
-      item['units'] = 1;
-      this.items.push(item);
+      if(removeItem){
+        this.items = this.items.filter(it => {
+          return it.id != item.id;
+        })
+      } else {
+        item['units'] = 1;
+        this.items.push(item);  
+      }
     }
 
     this._items.next(this.items);
@@ -40,6 +62,16 @@ export class CartService {
 
     this.total = sum;
     this._total.next(this.total);
+
+    this.setItemsInStorage(this.items);
+  }
+
+  public setItemsInStorage(items) {
+    localStorage.setItem('cart', JSON.stringify(items));
+  }
+
+  public getItemsFromStorage() {
+    return JSON.parse(localStorage.getItem('cart'));
   }
 
   public getItems(){

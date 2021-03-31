@@ -28,4 +28,20 @@ export class CartComponent implements OnInit {
   showCart() {
     this.cartVisible = !this.cartVisible;
   }
+
+  plusCartItem(item) {
+    if(item.units <= 19){
+      // item.units++;
+
+      this.cartService.setItem(item);
+    }
+  }
+
+  minusCartItem(item) {
+    if(item.units >= 1){
+      // item.units--;
+
+      this.cartService.setItem(item, true);
+    }
+  }
 }

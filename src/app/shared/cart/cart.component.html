@@ -21,10 +21,12 @@
                     {{item.title}}
                 </td>
                 <td>
-                    {{item.units}}
+                    <button (click)="minusCartItem(item)">-</button>
+                    <input disabled class="input-cart-count" type="text" value="{{item.units}}" />
+                    <button (click)="plusCartItem(item)">+</button>
                 </td>
                 <td>
-                    {{item.cost}}
+                    {{item.cost}} * {{item.units}} = {{item.cost * item.units}} 
                 </td>
             </tr>
             <tr>
@@ -41,4 +43,5 @@
             </tr>
         </tbody>
     </table>
+    <button *ngIf="total > 0" class="checkout btn btn-success">Checkout</button>
 </div>
