@@ -1,0 +1,44 @@
+<!-- Template driven form -->
+<form id="login-form" *ngIf="!isLogin">
+    <fieldset class="col-md-4">
+        <h2>Login</h2>
+        <label for="email">Email/ Phone</label>
+        <input [(ngModel)]="emailOrPhone" class="form-control" type="text" name="emailOrPhone" id="email"/>
+
+        <br/>
+        <label for="password">Password</label>
+        <input [(ngModel)]="password" class="form-control" type="password" name="password" id="password" />
+
+        <br/>
+        <button (click)="submitLogin()" class="btn btn-success">Login</button>
+    </fieldset>
+</form>
+
+<form id="onetime-checkout" class="col-md-4">
+    (OR)
+    <hr/>
+
+    <h2>Without login/ proceed with details</h2>
+    <br/>
+
+    <label>First Name</label>
+    <input class="form-control" id="firstname" name="firstname" />
+    <br/>
+
+    <label>Last Name</label>
+    <input class="form-control" id="lastname" name="lastname" />
+    <br/>
+
+    <label>Email</label>
+    <input class="form-control" id="email" name="email" />
+    <br/>
+
+    <label>Phone</label>
+    <input class="form-control" id="phone" name="phone" />
+    <br/>
+
+    <label>Address</label>
+    <textarea class="form-control" id="address" name="address"></textarea>
+
+    <button class="btn btn-disabled">Proceed</button>
+</form>
