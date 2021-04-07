@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CookieModule } from 'ngx-cookie';
 
@@ -13,6 +13,7 @@ import { ProductCardComponent } from './shared/product-card/product-card.compone
 import { CartComponent } from './shared/cart/cart.component';
 import { CartService } from './cart.service';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { CreateOrderComponent } from './create-order/create-order.component';
 
 @NgModule({
   declarations: [
@@ -22,12 +23,14 @@ import { CheckoutComponent } from './checkout/checkout.component';
     HeaderComponent,
     ProductCardComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    CreateOrderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     CookieModule.forRoot()
   ],
   providers: [CartService],

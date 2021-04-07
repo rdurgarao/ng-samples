@@ -14,7 +14,7 @@
     </fieldset>
 </form>
 
-<form id="onetime-checkout" class="col-md-4">
+<form id="onetime-checkout" class="col-md-4" [formGroup]="nonLoginUserForm">
     (OR)
     <hr/>
 
@@ -22,23 +22,37 @@
     <br/>
 
     <label>First Name</label>
-    <input class="form-control" id="firstname" name="firstname" />
+    <input class="form-control" formControlName="firstName" id="firstname" name="firstname" />
+    <div *ngIf="nonLoginUserForm.controls['firstName'].invalid && (nonLoginUserForm.controls['firstName'].dirty || nonLoginUserForm.controls['firstName'].touched)" class="alert alert-danger">
+        <div *ngIf="nonLoginUserForm.controls['firstName'].errors.required">
+            firstName is required.
+        </div>
+    </div>
     <br/>
 
     <label>Last Name</label>
-    <input class="form-control" id="lastname" name="lastname" />
+    <input class="form-control" formControlName="lastName" id="lastname" name="lastname" />
     <br/>
 
     <label>Email</label>
-    <input class="form-control" id="email" name="email" />
+    <input class="form-control" formControlName="email" id="email" name="email" />
+    <div *ngIf="nonLoginUserForm.controls['email'].invalid && (nonLoginUserForm.controls['email'].dirty || nonLoginUserForm.controls['email'].touched)" class="alert alert-danger">
+        <div *ngIf="nonLoginUserForm.controls['email'].errors.required">
+            Email is required.
+        </div>
+        <!-- {{nonLoginUserForm.controls['email'].errors | json}} -->
+        <div *ngIf="nonLoginUserForm.controls['email'].errors.pattern">
+            Incorrect email.
+        </div>
+    </div>
     <br/>
 
     <label>Phone</label>
-    <input class="form-control" id="phone" name="phone" />
+    <input class="form-control" formControlName="phone" id="phone" name="phone" />
     <br/>
 
     <label>Address</label>
-    <textarea class="form-control" id="address" name="address"></textarea>
+    <textarea class="form-control" formControlName="address" id="address" name="address"></textarea>
 
-    <button class="btn btn-disabled">Proceed</button>
+    <button class="btn btn-success" [disabled]="!nonLoginUserForm.valid" (click)="proceedNonLoginUserSubmit()">Proceed</button>
 </form>
