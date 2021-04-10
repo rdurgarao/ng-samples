@@ -43,7 +43,20 @@ export class LoginService {
     return details[0];
   }
 
+  getCurrentOneTimeUser(){
+    return JSON.parse(this.cookieService.get('oneTimeUserDetails'));
+  }
+
   logout(){
     this.cookieService.remove('emailOrPhone');
+    this.cookieService.remove('oneTimeUserDetails');
+  }
+
+  storeLoginInCookiesOfOneTimeUser(details) {
+    this.cookieService.put('oneTimeUserDetails', details);
+  }
+
+  getCurrentUser() {
+    return this.getCurrentOneTimeUser() || this.getCurrentLoggedInUser();
   }
 }

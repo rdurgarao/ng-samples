@@ -12,8 +12,11 @@ import { HeaderComponent } from './shared/header/header.component';
 import { ProductCardComponent } from './shared/product-card/product-card.component';
 import { CartComponent } from './shared/cart/cart.component';
 import { CartService } from './cart.service';
+import { OrderService } from './order.service';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
+import { CurrencyPipe } from './currency.pipe';
+import { CreateOrderPaymentComponent } from './create-order-payment/create-order-payment.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { CreateOrderComponent } from './create-order/create-order.component';
     ProductCardComponent,
     CartComponent,
     CheckoutComponent,
-    CreateOrderComponent
+    CreateOrderComponent,
+    CurrencyPipe,
+    CreateOrderPaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,7 @@ import { CreateOrderComponent } from './create-order/create-order.component';
     ReactiveFormsModule,
     CookieModule.forRoot()
   ],
-  providers: [CartService],
+  providers: [CartService, OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

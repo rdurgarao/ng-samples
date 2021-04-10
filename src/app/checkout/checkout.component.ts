@@ -29,6 +29,17 @@ export class CheckoutComponent implements OnInit {
 
     if(this.isLogin) {
       this.redirectToCreateOrder();
+    } else {
+      const oneTimeDetails = this.loginService.getCurrentOneTimeUser();
+      this.nonLoginUserForm.patchValue(
+        {
+          'firstName': oneTimeDetails.firstName,
+          'lastName': oneTimeDetails.lastName,
+          'email': oneTimeDetails.email,
+          'phone': oneTimeDetails.phone, 
+          'address': oneTimeDetails.address
+        }
+      )
     }
   }
 
@@ -55,7 +66,9 @@ export class CheckoutComponent implements OnInit {
      });
 
     if(this.nonLoginUserForm.valid){
-      console.log(this.nonLoginUserForm);
+      const details = JSON.stringify(this.nonLoginUserForm.value);
+      this.loginService.storeLoginInCookiesOfOneTimeUser(details);
+      this.redirectToCreateOrder();
     }
   }
 }

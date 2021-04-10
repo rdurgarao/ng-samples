@@ -1,1 +1,47 @@
-<p>create-order works!</p>
+<h4>Place Order</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Units
+            </th>
+            <th>
+                Cost
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of lineItems">
+            <td>
+                {{item.title}}
+            </td>
+            <td>
+                <button (click)="minusCartItem(item)">-</button>
+                <input disabled class="input-cart-count" type="text" value="{{item.units}}" />
+                <button (click)="plusCartItem(item)">+</button>
+            </td>
+            <td>
+                {{item.cost}} * {{item.units}} = {{item.cost * item.units | currency:'INR'}} 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    Total
+                </b>
+            </td>
+            <td>
+            </td>
+            <td>
+                <b>
+                    {{total | currency:'INR'}}
+                </b>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<button [disabled]="total <= 0" class="checkout btn btn-success" (click)="lockOrder()">Submit</button>
