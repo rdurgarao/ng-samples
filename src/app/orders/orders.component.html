@@ -1,0 +1,34 @@
+<div class="container">
+    <h3>Orders</h3>
+    <hr/>
+
+    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+        <ngb-panel title="{{order.id}}" *ngFor="let order of orders">
+          <ng-template ngbPanelContent>
+            <table>
+                <tr *ngFor="let item of order.items">
+                    <td>
+                        {{item.title}}
+                    </td>
+                    <td>
+                        (<small>
+                            {{item.cost}} * {{item.units}} = {{item.cost * item.units | currency:'INR'}} 
+                        </small>)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td><b>
+                        {{order.total | currency:'INR'}}
+                    </b></td>
+                </tr>
+                <tr (click)="navigateToOrder(order.id)">
+                    <small class="text-info">
+                        Detail View
+                    </small>
+                </tr>
+            </table>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+</div>

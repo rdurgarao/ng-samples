@@ -11,7 +11,9 @@ import {Item} from './types/item.type';
 export class OrderService {
 
   public orders: Order[] = [];
-  constructor(private cartService: CartService, private loginService: LoginService) { }
+  constructor(private cartService: CartService, private loginService: LoginService) {
+    this.orders = this.getOrders();
+  }
 
   assignCurrentOrderToCustomer(): Order{
     const items: Item[] = this.cartService.getFinalOrderItems();
@@ -24,7 +26,8 @@ export class OrderService {
       id: id,
       userId: null,
       isLoginCustomer: null,
-      customerDetail: null
+      customerDetail: null,
+      status: 'Payment Accepted'
     }
 
     if(this.loginService.checkLogin()){
@@ -36,6 +39,22 @@ export class OrderService {
     }
 
     this.orders.push(order);
+    localStorage.setItem('userOrders', JSON.stringify(this.orders));
     return order;
+  }
+
+  public getOrders(){
+    const userOrders = localStorage.getItem('userOrders');
+    return userOrders ? JSON.parse(localStorage.getItem('userOrders')) : [];
+  }
+
+  public getOrder(id: string): Order {
+    let orders = this.getOrders();
+
+    const matchedOrders = orders.filter(order => {
+      return order.id === id;
+    });
+
+    return matchedOrders[0];
   }
 }

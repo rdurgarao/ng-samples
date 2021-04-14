@@ -105,4 +105,9 @@ export class CartService {
 
     return sum;
   }
+
+  public clearCart() {
+    localStorage.removeItem('currentOrder');
+    localStorage.removeItem('cart');
+  }
 }

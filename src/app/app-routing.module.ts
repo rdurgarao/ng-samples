@@ -6,6 +6,8 @@ import { CreateOrderComponent } from './create-order/create-order.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { CreateOrderPaymentComponent } from './create-order-payment/create-order-payment.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { OrdersComponent } from './orders/orders.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -13,6 +15,8 @@ const routes: Routes = [
   {path: 'checkout', component: CheckoutComponent},
   {path: 'create-order', component: CreateOrderComponent},
   {path: 'create-payment', component: CreateOrderPaymentComponent},
+  {path: 'order-details', component: OrderDetailsComponent},
+  {path: 'orders', component: OrdersComponent},
   {path: '**', component: HomeComponent}
 ];
 

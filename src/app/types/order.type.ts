@@ -7,5 +7,6 @@ export interface Order {
     id: string, 
     userId: string, 
     isLoginCustomer: boolean,
-    customerDetail?: CustomerDetail
+    customerDetail?: CustomerDetail, 
+    status?: string
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/cart.service';
 import { OrderService } from '../order.service';
-
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   selector: 'app-create-order-payment',
   templateUrl: './create-order-payment.component.html',
@@ -9,7 +9,8 @@ import { OrderService } from '../order.service';
 })
 export class CreateOrderPaymentComponent implements OnInit {
 
-  constructor(private cartService: CartService, private orderService: OrderService) { }
+  constructor(private cartService: CartService, private orderService: OrderService,
+    private route: ActivatedRoute, private router: Router) { }
 
   public total: number = 0;
   ngOnInit(): void {
@@ -17,9 +18,10 @@ export class CreateOrderPaymentComponent implements OnInit {
   }
 
   paymentConfirmation() {
-    alert('in')
     const order = this.orderService.assignCurrentOrderToCustomer();
 
-    console.log(order);
+    this.cartService.clearCart();
+    this.router.navigate(['/order-details'], { queryParams: {id: order.id}, relativeTo: this.route });
+    // console.log(order);
   }
 }

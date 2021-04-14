@@ -1,0 +1,30 @@
+<div class="container">
+    <h3>
+        Order Details
+    </h3>
+    <hr/>
+    <small>Order ID: #{{id}}</small>
+
+    <div *ngIf="order">
+        <table>
+            <tr *ngFor="let item of order.items">
+                <td>
+                    {{item.title}}
+                </td>
+                <td>
+                    (<small>
+                        {{item.cost}} * {{item.units}} = {{item.cost * item.units | currency:'INR'}} 
+                    </small>)
+                </td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td><b>
+                    {{order.total | currency:'INR'}}
+                </b></td>
+            </tr>
+        </table>
+    </div>
+    <a routerLink="/orders">Back to all orders</a>
+</div>
+

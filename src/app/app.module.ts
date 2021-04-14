@@ -17,6 +17,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
 import { CurrencyPipe } from './currency.pipe';
 import { CreateOrderPaymentComponent } from './create-order-payment/create-order-payment.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { OrdersComponent } from './orders/orders.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -29,14 +32,17 @@ import { CreateOrderPaymentComponent } from './create-order-payment/create-order
     CheckoutComponent,
     CreateOrderComponent,
     CurrencyPipe,
-    CreateOrderPaymentComponent
+    CreateOrderPaymentComponent,
+    OrderDetailsComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    NgbModule
   ],
   providers: [CartService, OrderService],
   bootstrap: [AppComponent]
