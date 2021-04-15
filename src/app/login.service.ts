@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {BehaviorSubject} from "rxjs";
+
 import * as LoginDetailsJSON from '../data/users.json';
 import * as LoginJSON from '../data/logins.json';
 
@@ -11,17 +13,22 @@ export class LoginService {
 
   constructor(private cookieService: CookieService) { }
 
+  public _isLogin: BehaviorSubject<any> = new BehaviorSubject(!!this.getCurrentUser());
+
   login(emailOrPhone: string, password: string){
     const logins = (LoginJSON  as  any).default;
     const matchedResults = logins.filter(login => login.emailOrPhone === emailOrPhone);
 
     if(matchedResults.length === 0){
+      this._isLogin.next(false);
       return false;
     } else {
       if(matchedResults[0].password === password){
         this.storeLoginInCookies(emailOrPhone);
+        this._isLogin.next(true);
         return true;
       } else {
+        this._isLogin.next(false);
         return false;
       }
     }
@@ -44,7 +51,7 @@ export class LoginService {
   }
 
   getCurrentOneTimeUser(){
-    return JSON.parse(this.cookieService.get('oneTimeUserDetails'));
+    return this.cookieService.get('oneTimeUserDetails') ? JSON.parse(this.cookieService.get('oneTimeUserDetails')) : null;
   }
 
   logout(){

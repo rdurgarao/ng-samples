@@ -1,4 +1,4 @@
-<button (click)="showCart()">Cart</button>
+<button class="btn btn-primary" (click)="showCart()">Cart <span class="badge badge-light">{{lineItems.length}}</span></button>
 
 <div id="cart-body" *ngIf="cartVisible">
     <table class="table">

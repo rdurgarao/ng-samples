@@ -46,6 +46,7 @@ export class CartService {
         return it;
       });
 
+      modifiedItems = modifiedItems.filter(item => item.units > 0);
       this.items = modifiedItems;
     } else {
       if(removeItem){
@@ -107,6 +108,10 @@ export class CartService {
   }
 
   public clearCart() {
+    this.items = [];
+    this.total = 0;
+    this._items.next([]);
+    this._total.next(0);
     localStorage.removeItem('currentOrder');
     localStorage.removeItem('cart');
   }

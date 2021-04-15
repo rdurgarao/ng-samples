@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { CartService } from 'src/app/cart.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class CartComponent implements OnInit {
   public lineItems = [];
   public total: number;
   public cartVisible: Boolean = false;
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService, private eRef: ElementRef) {
 
    }
 
@@ -42,6 +42,15 @@ export class CartComponent implements OnInit {
       // item.units--;
 
       this.cartService.setItem(item, true);
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if(this.eRef.nativeElement.contains(event.target)) {
+      // console.log("clicked inside");
+    } else {
+      this.cartVisible = false;
     }
   }
 }

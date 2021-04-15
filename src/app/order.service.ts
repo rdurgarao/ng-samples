@@ -44,8 +44,15 @@ export class OrderService {
   }
 
   public getOrders(){
-    const userOrders = localStorage.getItem('userOrders');
-    return userOrders ? JSON.parse(localStorage.getItem('userOrders')) : [];
+    let userOrdersStorage = localStorage.getItem('userOrders');
+    let userOrders = userOrdersStorage ? JSON.parse(userOrdersStorage) : [];
+
+    if(this.loginService.checkLogin()) {
+      const loginUserId = this.loginService.getCurrentUser().id;
+      userOrders = userOrders.filter(order => order.userId === loginUserId);
+    } 
+
+    return userOrders;
   }
 
   public getOrder(id: string): Order {

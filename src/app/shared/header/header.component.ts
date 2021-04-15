@@ -12,10 +12,14 @@ export class HeaderComponent implements OnInit {
 
   public isLogin: boolean = false;
   ngOnInit(): void {
-    this.isLogin = this.loginService.getCurrentLoggedInUser();
+    this.loginService._isLogin.subscribe(isLogin => {
+      this.isLogin = isLogin;
+    });
+    // this.isLogin = this.loginService.getCurrentLoggedInUser();
   }
 
   logout(){
+    this.isLogin = false;
     this.loginService.logout();
     this.router.navigate(['home']);
   }
