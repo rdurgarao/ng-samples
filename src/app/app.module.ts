@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { CookieModule } from 'ngx-cookie';
 
@@ -20,6 +21,7 @@ import { CreateOrderPaymentComponent } from './create-order-payment/create-order
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { OrdersComponent } from './orders/orders.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpRequestService } from './http-request.service';
 
 @NgModule({
   declarations: [
@@ -42,9 +44,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     CookieModule.forRoot(),
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
-  providers: [CartService, OrderService],
+  providers: [CartService, OrderService, HttpRequestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

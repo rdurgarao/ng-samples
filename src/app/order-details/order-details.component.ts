@@ -13,7 +13,8 @@ export class OrderDetailsComponent implements OnInit {
   public id: string;
   public order: Order;
 
-  constructor(private router: ActivatedRoute, private orderService: OrderService) { }
+  constructor(private router: ActivatedRoute, private orderService: OrderService) {
+   }
 
   ngOnInit(): void {
     this.router.queryParams.subscribe(params => {

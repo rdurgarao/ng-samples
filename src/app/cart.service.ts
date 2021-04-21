@@ -3,6 +3,7 @@ import {BehaviorSubject} from "rxjs";
 
 import {Item} from './types/item.type';
 import { CookieService } from 'ngx-cookie';
+import { HttpRequestService } from './http-request.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +14,22 @@ export class CartService {
 
   public _items: BehaviorSubject<any> = new BehaviorSubject([]);
   public _total: BehaviorSubject<any> = new BehaviorSubject(0);
-  private items: Item[] = [];
+  private items: any = [];
   private total:number;
 
-  constructor(private cookieService: CookieService) {
-    this.items = this.getItemsFromStorage() || [];
+  constructor(private cookieService: CookieService, private httpReq: HttpRequestService) {
+    this.getItemsFromAPI().subscribe(response => {
+      this.items = response || [];
 
-    this._items.next(this.items);
-    let sum = 0;
-    this.items.forEach(item => {
-      sum = sum + (item.cost * item.units);
+      this._items.next(this.items);
+      let sum = 0;
+      this.items.forEach(item => {
+        sum = sum + (item.cost * item.units);
+      });
+  
+      this.total = sum;
+      this._total.next(this.total);  
     });
-
-    this.total = sum;
-    this._total.next(this.total);
   }
 
   public setItem(item: Item, removeItem=false){
@@ -70,10 +73,21 @@ export class CartService {
     this._total.next(this.total);
 
     this.setItemsInStorage(this.items);
+    this.sendItemsToCartAPI(this.items);
+  }
+
+  public sendItemsToCartAPI(items: Item[]){
+    this.httpReq.post('cart', items).subscribe(response => {
+      console.log(response);
+    });
   }
 
   public setItemsInStorage(items: Item[]) {
     localStorage.setItem('cart', JSON.stringify(items));
+  }
+
+  public getItemsFromAPI() {
+    return this.httpReq.get('cart');
   }
 
   public getItemsFromStorage() {
