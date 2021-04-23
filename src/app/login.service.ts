@@ -1,37 +1,36 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 
 import * as LoginDetailsJSON from '../data/users.json';
 import * as LoginJSON from '../data/logins.json';
 
 import { CookieService } from 'ngx-cookie';
+import { HttpRequestService } from './http-request.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService, private httpReq: HttpRequestService) { }
 
   public _isLogin: BehaviorSubject<any> = new BehaviorSubject(!!this.getCurrentUser());
 
   login(emailOrPhone: string, password: string){
-    const logins = (LoginJSON  as  any).default;
-    const matchedResults = logins.filter(login => login.emailOrPhone === emailOrPhone);
 
-    if(matchedResults.length === 0){
-      this._isLogin.next(false);
-      return false;
-    } else {
-      if(matchedResults[0].password === password){
-        this.storeLoginInCookies(emailOrPhone);
+    const reqBody = {
+      email: emailOrPhone,
+      password
+    }
+    
+    this.httpReq.post('login', reqBody).subscribe(res => {
+      if(res['status'] == 'success') {
         this._isLogin.next(true);
-        return true;
       } else {
         this._isLogin.next(false);
-        return false;
+        alert("invalid credentials")
       }
-    }
+    })
   }
 
   storeLoginInCookies(emailOrPhone){

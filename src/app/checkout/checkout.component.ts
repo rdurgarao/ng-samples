@@ -27,6 +27,12 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.isLogin = !!this.loginService.checkLogin();
 
+    this.loginService._isLogin.subscribe(isLogin => {
+      if(isLogin){
+        this.redirectToCreateOrder();
+      }
+    })
+
     if(this.isLogin) {
       this.redirectToCreateOrder();
     } else {
@@ -49,14 +55,14 @@ export class CheckoutComponent implements OnInit {
 
   submitLogin(){
     console.log(this.emailOrPhone, this.password);
-    const result = this.loginService.login(this.emailOrPhone, this.password);
+    this.loginService.login(this.emailOrPhone, this.password);
 
-    if(result){
-      const currentUser = this.loginService.getCurrentLoggedInUser();
-      this.redirectToCreateOrder();
-    } else {
-      alert('invalid credentials')
-    }
+    // if(result){
+    //   const currentUser = this.loginService.getCurrentLoggedInUser();
+    //   this.redirectToCreateOrder();
+    // } else {
+    //   alert('invalid credentials')
+    // }
   }
 
   proceedNonLoginUserSubmit() {
