@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
+// import { ProductsService } from '../products.service';
+import { Store } from '@ngrx/store';
+import * as Products from '../products.actions';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +14,13 @@ export class HomeComponent implements OnInit {
   @ViewChild('title') titleEle; 
   public products: any = [];
   public titleMsg: string = 'Welcome to Grocery store';
-  constructor(private httpReq: HttpRequestService) { }
+  constructor(private store: Store<any>) { }
 
   ngOnInit(): void {
-    this.httpReq.get('products').subscribe(response => {
-      this.products = response;
+    this.store.dispatch(new Products.GetProducts());
+    this.store.select('products').subscribe(response => {
+    // this.productsService.getProducts().subscribe(response => {
+      this.products = response.products;
 
       const colors:string[] = ['#000', '#fff', '#5c5c5c', '#fefefe', 'red'];
       setInterval(() => {

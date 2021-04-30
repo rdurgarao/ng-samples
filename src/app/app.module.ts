@@ -4,6 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { CookieModule } from 'ngx-cookie';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { StoreModule } from '@ngrx/store';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,14 +17,18 @@ import { ProductCardComponent } from './shared/product-card/product-card.compone
 import { CartComponent } from './shared/cart/cart.component';
 import { CartService } from './cart.service';
 import { OrderService } from './order.service';
+import { ProductsService } from './products.service';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
 import { CurrencyPipe } from './currency.pipe';
 import { CreateOrderPaymentComponent } from './create-order-payment/create-order-payment.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { OrdersComponent } from './orders/orders.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpRequestService } from './http-request.service';
+import { productsReducer } from './products.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductsEffects } from './products.effects';
+import { ProductsSearchComponent } from './products-search/products-search.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +43,8 @@ import { HttpRequestService } from './http-request.service';
     CurrencyPipe,
     CreateOrderPaymentComponent,
     OrderDetailsComponent,
-    OrdersComponent
+    OrdersComponent,
+    ProductsSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -45,9 +53,14 @@ import { HttpRequestService } from './http-request.service';
     ReactiveFormsModule,
     CookieModule.forRoot(),
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule,
+    StoreModule.forRoot({}),
+    StoreModule.forFeature('products', productsReducer),
+    EffectsModule.forRoot([]),
+    EffectsModule.forFeature([ProductsEffects])
   ],
-  providers: [CartService, OrderService, HttpRequestService],
+  providers: [CartService, OrderService, HttpRequestService, ProductsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
