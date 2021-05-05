@@ -26,9 +26,11 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { OrdersComponent } from './orders/orders.component';
 import { HttpRequestService } from './http-request.service';
 import { productsReducer } from './products.reducer';
+import { cartReducer } from './cart.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductsEffects } from './products.effects';
 import { ProductsSearchComponent } from './products-search/products-search.component';
+import { CartEffects } from './cart.effects';
 
 @NgModule({
   declarations: [
@@ -57,8 +59,10 @@ import { ProductsSearchComponent } from './products-search/products-search.compo
     NgxPaginationModule,
     StoreModule.forRoot({}),
     StoreModule.forFeature('products', productsReducer),
-    EffectsModule.forRoot([]),
-    EffectsModule.forFeature([ProductsEffects])
+    StoreModule.forFeature('cart', cartReducer),
+    // EffectsModule.forRoot([]),
+    EffectsModule.forRoot([ProductsEffects])
+    // EffectsModule.forFeature([CartEffects])
   ],
   providers: [CartService, OrderService, HttpRequestService, ProductsService],
   bootstrap: [AppComponent]

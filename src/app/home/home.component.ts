@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpRequestService } from '../http-request.service';
 // import { ProductsService } from '../products.service';
 import { Store } from '@ngrx/store';
 import * as Products from '../products.actions';

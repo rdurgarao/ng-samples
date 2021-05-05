@@ -77,9 +77,7 @@ export class CartService {
   }
 
   public sendItemsToCartAPI(items: Item[]){
-    this.httpReq.post('cart', items).subscribe(response => {
-      console.log(response);
-    });
+    return this.httpReq.post('cart', items);
   }
 
   public setItemsInStorage(items: Item[]) {

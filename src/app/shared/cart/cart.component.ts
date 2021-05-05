@@ -1,6 +1,9 @@
 import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { CartService } from 'src/app/cart.service';
 
+import { Store } from '@ngrx/store';
+import * as Cart from '../../cart.actions';
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -11,14 +14,18 @@ export class CartComponent implements OnInit {
   public lineItems = [];
   public total: number;
   public cartVisible: Boolean = false;
-  constructor(private cartService: CartService, private eRef: ElementRef) {
-
+  constructor(private cartService: CartService, private eRef: ElementRef, private store: Store<any>) {
    }
 
   ngOnInit(): void {
-    this.cartService._items.subscribe(items => {
-      this.lineItems = items;
+    this.store.dispatch(new Cart.GetCartItems());
+
+    this.store.select('cart').subscribe(response => {
+      this.lineItems = response.items;
     });
+    // this.cartService._items.subscribe(items => {
+    //   this.lineItems = items;
+    // });
 
     this.cartService._total.subscribe(total => {
       this.total = total;
