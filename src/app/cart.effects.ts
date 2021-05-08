@@ -38,10 +38,12 @@ export class CartEffects {
   updateCartItems$ = this.actions$.pipe(
     ofType(CartActionType.UPDATE_CART_ITEMS),
     switchMap((items) =>
-      this.cartService.sendItemsToCartAPI(items).pipe(
-        map((items: any) => new CartItemSuccess(items)),
+    {
+      return this.cartService.sendItemsToCartAPI(items['payload']).pipe(
+        map((res: any) => new CartItemSuccess(res)),
         catchError(error => of(new CartItemFailure(error)))
       )
+      }
     )
   );
 }

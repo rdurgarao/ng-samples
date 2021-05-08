@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(new Products.GetProducts());
     this.store.select('products').subscribe(response => {
     // this.productsService.getProducts().subscribe(response => {
+      if(!response) return;
       this.products = response.products;
 
       const colors:string[] = ['#000', '#fff', '#5c5c5c', '#fefefe', 'red'];

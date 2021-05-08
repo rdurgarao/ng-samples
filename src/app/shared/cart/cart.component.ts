@@ -21,6 +21,7 @@ export class CartComponent implements OnInit {
     this.store.dispatch(new Cart.GetCartItems());
 
     this.store.select('cart').subscribe(response => {
+      if(!response) return;
       this.lineItems = response.items;
     });
     // this.cartService._items.subscribe(items => {
@@ -55,7 +56,7 @@ export class CartComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   clickout(event) {
     if(this.eRef.nativeElement.contains(event.target)) {
-      // console.log("clicked inside");
+      console.log("clicked inside");
     } else {
       this.cartVisible = false;
     }

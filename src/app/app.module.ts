@@ -57,12 +57,12 @@ import { CartEffects } from './cart.effects';
     NgbModule,
     HttpClientModule,
     NgxPaginationModule,
-    StoreModule.forRoot({}),
-    StoreModule.forFeature('products', productsReducer),
-    StoreModule.forFeature('cart', cartReducer),
-    // EffectsModule.forRoot([]),
-    EffectsModule.forRoot([ProductsEffects])
-    // EffectsModule.forFeature([CartEffects])
+    // StoreModule.forRoot({}),
+    // StoreModule.forFeature('products', productsReducer),
+    StoreModule.forRoot({cart: cartReducer, products: productsReducer}),
+    EffectsModule.forRoot([]),
+    EffectsModule.forFeature([ProductsEffects]),
+    EffectsModule.forFeature([CartEffects])
   ],
   providers: [CartService, OrderService, HttpRequestService, ProductsService],
   bootstrap: [AppComponent]

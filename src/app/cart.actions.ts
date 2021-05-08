@@ -14,6 +14,7 @@ export class GetCartItems implements Action {
 
 export class UpdateCartItems implements Action {
   readonly type = CartActionType.UPDATE_CART_ITEMS;
+  constructor(public payload: Array<LineItem>) { }
 }
 
 export class CartItemSuccess implements Action {

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 
+import { Store } from '@ngrx/store';
+import * as Cart from './cart.actions';
+
 import {Item} from './types/item.type';
 import { CookieService } from 'ngx-cookie';
 import { HttpRequestService } from './http-request.service';
@@ -17,7 +20,7 @@ export class CartService {
   private items: any = [];
   private total:number;
 
-  constructor(private cookieService: CookieService, private httpReq: HttpRequestService) {
+  constructor(private cookieService: CookieService, private httpReq: HttpRequestService, private store: Store<any>) {
     this.getItemsFromAPI().subscribe(response => {
       this.items = response || [];
 
@@ -33,10 +36,12 @@ export class CartService {
   }
 
   public setItem(item: Item, removeItem=false){
+    this.items = this.items.slice(0);
     const matchedItems: Item[] = this.items.filter(it => item.id == it.id);
 
     if(matchedItems.length > 0){
       let modifiedItems: Item[] = this.items.map(it => {
+        it = Object.assign({}, it);
         if(item.id == it.id){
 
           if(removeItem){
@@ -73,7 +78,8 @@ export class CartService {
     this._total.next(this.total);
 
     this.setItemsInStorage(this.items);
-    this.sendItemsToCartAPI(this.items);
+    // this.sendItemsToCartAPI(this.items);
+    this.store.dispatch(new Cart.UpdateCartItems(this.items));
   }
 
   public sendItemsToCartAPI(items: Item[]){

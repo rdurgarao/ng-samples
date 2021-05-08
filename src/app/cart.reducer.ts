@@ -10,7 +10,10 @@ export function cartReducer(state = initialState, action: CartActions) {
     }
 
     case CartActionType.UPDATE_CART_ITEMS: {
-      return { ...state };
+      return { 
+        ...state,
+        items: action.payload
+       };
     }
  
     case CartActionType.CART_ITEMS_SUCCESS: {
