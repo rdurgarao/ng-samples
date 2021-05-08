@@ -92,4 +92,20 @@ Module creations
 
 JS exercises for beginners
 raod1989r@gmail.com
+
+JS Concept based examples
+- https://github.com/JSsnippets/JavaScript-snippets
+- https://github.com/sudheerj/javascript-interview-questions
+- https://www.freecodecamp.org/news/javascript-example/
+
+
+Angular theoratical questions
+- https://github.com/sudheerj/angular-interview-questions
+- https://github.com/learning-zone/angular-interview-questions
+- https://github.com/Yonet/Angular-Interview-Questions
+- https://github.com/WebPredict/angular-2-interview-questions
+
+
+Angular live editor tests
+- https://coderbyte.com/information/First%20Factorial
 ```
