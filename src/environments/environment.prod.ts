@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseURL: 'http://dev.shopping-cart:4567'
+  baseURL: 'https://ecom-backend-12.herokuapp.com'
 };
