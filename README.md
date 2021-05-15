@@ -1,6 +1,9 @@
 ```
 Angular 
 
+> Demo 
+https://e-comm-123.herokuapp.com/
+
 > Project 
 
 Functionality
